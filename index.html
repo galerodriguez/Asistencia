@@ -1,148 +1,159 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <title>Confirmación de Asistencia - Jacqueline</title>
-  <style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Confirmación de Asistencia - Jacqueline</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #c0c0c0, #d4af37);
+    margin: 0;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+  }
+  form {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    padding: 2rem;
+    max-width: 480px;
+    width: 100%;
+  }
+  h2 {
+    text-align: center;
+    color: #b4975a;
+    margin-bottom: 1.5rem;
+  }
+  label {
+    font-weight: 700;
+    margin-top: 1rem;
+    display: block;
+  }
+  input[type="text"],
+  select {
+    width: 100%;
+    padding: 0.6rem;
+    margin-top: 0.3rem;
+    border: 1px solid #999;
+    border-radius: 6px;
+    font-size: 1rem;
+  }
+  .checkbox-group label {
+    font-weight: 400;
+    display: block;
+    margin-top: 0.5rem;
+  }
+  button {
+    margin-top: 2rem;
+    background-color: #25d366;
+    border: none;
+    padding: 0.8rem;
+    width: 100%;
+    color: white;
+    font-weight: 700;
+    font-size: 1.1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  button:hover {
+    background-color: #128c7e;
+  }
+  #mensajeGracias {
+    text-align: center;
+    margin-top: 1rem;
+    font-weight: 700;
+    color: #444;
+  }
+  @media (max-width: 480px) {
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #c0c0c0, #d4af37);
-      padding: 2rem;
-      margin: 0;
-      color: #4a4a4a;
+      padding: 1rem;
     }
     form {
-      background: white;
-      padding: 2rem;
-      max-width: 500px;
-      margin: auto;
-      border-radius: 20px;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+      padding: 1.2rem;
     }
-    h2 {
-      color: #b4975a;
-      text-align: center;
-      margin-bottom: 1rem;
-    }
-    label {
-      display: block;
-      margin-top: 1rem;
-      font-weight: bold;
-    }
-    input[type="text"],
-    select {
-      width: 100%;
-      padding: 0.5rem;
-      margin-top: 0.3rem;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-    .checkbox-group label {
-      font-weight: normal;
-      margin-top: 0.3rem;
-      display: block;
-      cursor: pointer;
-    }
-    button {
-      margin-top: 1.5rem;
-      background-color: #25d366;
-      color: white;
-      border: none;
-      padding: 0.8rem;
-      width: 100%;
-      font-size: 1rem;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #128c7e;
-    }
-    #mensajeGracias {
-      text-align: center;
-      margin-top: 1rem;
-      color: #444;
-      font-weight: bold;
-    }
-    @media (max-width: 600px) {
-      form {
-        padding: 1rem;
-      }
-    }
-  </style>
+  }
+</style>
 </head>
 <body>
-  <form onsubmit="enviarFormulario(); return false;">
-    <h2>Confirmación de Asistencia</h2>
 
-    <label for="nombre">Nombre completo:</label>
-    <input type="text" id="nombre" required />
+<form id="confirmacionForm">
+  <h2>Confirmación de Asistencia</h2>
 
-    <label for="asistencia">¿Confirmás tu asistencia?</label>
-    <select id="asistencia" required>
-      <option value="">Seleccionar</option>
-      <option value="Sí">Sí</option>
-      <option value="No">No</option>
-    </select>
+  <label for="nombre">Nombre completo:</label>
+  <input type="text" id="nombre" name="nombre" required />
 
-    <label>Restricción alimentaria (puede marcar varias):</label>
-    <div class="checkbox-group">
-      <label><input type="checkbox" name="alimentacion" value="Ninguna" /> Ninguna</label>
-      <label><input type="checkbox" name="alimentacion" value="SIN TACC" /> SIN TACC</label>
-      <label><input type="checkbox" name="alimentacion" value="Vegano" /> Vegano</label>
-      <label><input type="checkbox" name="alimentacion" value="Hipertensión" /> Hipertensión</label>
-      <label><input type="checkbox" name="alimentacion" value="Diabético" /> Diabético</label>
-    </div>
+  <label for="asistencia">¿Confirmás tu asistencia?</label>
+  <select id="asistencia" name="asistencia" required>
+    <option value="">Seleccionar</option>
+    <option value="Sí">Sí</option>
+    <option value="No">No</option>
+  </select>
 
-    <button type="submit">Enviar confirmación</button>
+  <label>Restricción alimentaria (puede marcar varias):</label>
+  <div class="checkbox-group">
+    <label><input type="checkbox" name="alimentacion" value="Ninguna" /> Ninguna</label>
+    <label><input type="checkbox" name="alimentacion" value="SIN TACC" /> SIN TACC</label>
+    <label><input type="checkbox" name="alimentacion" value="Vegano" /> Vegano</label>
+    <label><input type="checkbox" name="alimentacion" value="Hipertensión" /> Hipertensión</label>
+    <label><input type="checkbox" name="alimentacion" value="Diabético" /> Diabético</label>
+  </div>
 
-    <div id="mensajeGracias"></div>
-  </form>
+  <button type="submit">Enviar confirmación</button>
 
-  <script>
-    function generarID(nombre) {
-      const letras = nombre.replace(/\s/g, '').substring(0, 3).toUpperCase();
-      const aleatorio = Math.random().toString(36).substring(2, 7).toUpperCase();
-      return letras + aleatorio;
-    }
+  <div id="mensajeGracias"></div>
+</form>
 
-    async function enviarFormulario() {
-      const nombre = document.getElementById("nombre").value.trim();
-      const asistencia = document.getElementById("asistencia").value;
-      const restricciones = Array.from(document.querySelectorAll('input[name="alimentacion"]:checked'))
-        .map(el => el.value)
-        .join(", ") || "No especifica";
-      const idUnico = generarID(nombre);
+<script>
+  function generarID(nombre) {
+    const letras = nombre.replace(/\s/g, '').substring(0, 3).toUpperCase();
+    const aleatorio = Math.random().toString(36).substring(2, 7).toUpperCase();
+    return letras + aleatorio;
+  }
 
-      const mensaje = `Hola, soy ${nombre}. Confirmo asistencia: ${asistencia}. Restricciones alimentarias: ${restricciones}. ID de invitación: ${idUnico}. Evento: Mis 15 Años - Jacqueline`;
-      const telefono = "541124572552";
-      const url = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
+  document.getElementById('confirmacionForm').addEventListener('submit', async function (e) {
+    e.preventDefault();
 
-      const data = {
-        nombre: nombre,
-        asistencia: asistencia,
-        restricciones: restricciones,
-        id: idUnico
-      };
+    const nombre = document.getElementById('nombre').value.trim();
+    const asistencia = document.getElementById('asistencia').value;
 
-      try {
-        const response = await fetch("https://script.google.com/macros/s/AKfycbyL6c5DwqKB81dlBKzkb0IzgUK04ifgn_KO6ILhnmDThWArB_GXixkBCJBIoTroj35Z7w/exec", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(data)
-        });
+    const restricciones = Array.from(document.querySelectorAll('input[name="alimentacion"]:checked'))
+                              .map(el => el.value)
+                              .join(", ") || "No especifica";
 
-        if (!response.ok) throw new Error("Error en el servidor");
+    const idUnico = generarID(nombre);
 
-        document.getElementById("mensajeGracias").innerHTML = `¡Gracias por confirmar, ${nombre}!<br>Tu código de invitación es: <strong>${idUnico}</strong>`;
+    const data = {
+      nombre,
+      asistencia,
+      restricciones,
+      id: idUnico
+    };
 
-        // Abre WhatsApp en una nueva pestaña
-        window.open(url, "_blank");
-      } catch (error) {
-        alert("Hubo un error al enviar los datos. Intentá nuevamente.");
+    const urlScript = "https://script.google.com/macros/s/AKfycbzrFpG_TmPnPU9eOlGlYsRrmYamogpbg8opvAJYUCaqHr72Glxe-Wnk5tS7wP-K6nuuQw/exec";
+
+    try {
+      const res = await fetch(urlScript, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      const json = await res.json();
+      if (json.result === "success") {
+        document.getElementById('mensajeGracias').innerHTML = `¡Gracias por confirmar, <strong>${nombre}</strong>!<br>Tu código de invitación es: <strong>${idUnico}</strong>`;
+        this.reset();
+      } else {
+        document.getElementById('mensajeGracias').innerText = 'Hubo un error, intentá nuevamente.';
       }
+    } catch (error) {
+      document.getElementById('mensajeGracias').innerText = 'Error de conexión, intentá nuevamente.';
     }
-  </script>
+  });
+</script>
+
 </body>
 </html>
