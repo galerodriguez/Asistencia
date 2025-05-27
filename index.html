@@ -4,19 +4,25 @@
   <meta charset="UTF-8" />
   <title>Confirmación de Asistencia - Jacqueline</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="manifest" href="manifest.json" />
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Segoe+UI&display=swap');
 
+    /* Reset */
+    * {
+      box-sizing: border-box;
+    }
+
     body {
+      margin: 0; padding: 20px;
       background: linear-gradient(135deg, #e0e0e0, #b0b0b0);
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       color: #2f2f2f;
-      margin: 0;
-      padding: 20px;
       display: flex;
       justify-content: center;
-      min-height: 100vh;
       align-items: center;
+      min-height: 100vh;
+      overflow-x: hidden;
     }
 
     .container {
@@ -25,20 +31,36 @@
       width: 100%;
       border-radius: 12px;
       padding: 30px 25px;
-      box-shadow: 0 0 15px rgba(150, 150, 150, 0.4);
+      box-shadow: 0 0 20px rgba(150, 150, 150, 0.45);
       border: 2px solid #c0c0c0;
+      animation: fadeInUp 0.8s ease forwards;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     h2 {
       font-family: 'Playfair Display', serif;
       font-weight: 700;
-      font-size: 2.8rem;
+      font-size: 3rem;
       text-align: center;
       color: #6a6a6a;
-      margin-bottom: 1.8rem;
+      margin-bottom: 2rem;
       letter-spacing: 2px;
       text-transform: uppercase;
       user-select: none;
+      animation: fadeInText 1.5s ease forwards;
+      opacity: 0;
+    }
+
+    @keyframes fadeInText {
+      to {opacity: 1;}
     }
 
     label {
@@ -46,28 +68,31 @@
       font-weight: 600;
       margin-bottom: 0.5rem;
       color: #555;
-      margin-top: 1rem;
+      margin-top: 1.3rem;
       user-select: none;
     }
 
     input[type="text"],
     select {
       width: 100%;
-      padding: 10px 12px;
-      border-radius: 8px;
-      border: 1.5px solid #b0b0b0;
-      font-size: 1rem;
-      transition: border-color 0.3s ease;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1.8px solid #b0b0b0;
+      font-size: 1.05rem;
+      transition: border-color 0.4s ease, box-shadow 0.4s ease;
+      background: #fafafa;
+      font-weight: 500;
+      outline-offset: 2px;
     }
     input[type="text"]:focus,
     select:focus {
-      outline: none;
       border-color: #8a8a8a;
+      box-shadow: 0 0 8px 2px #a9a9a9cc;
       background-color: #f0f0f0;
     }
 
     .multiple-choice {
-      margin-top: 0.5rem;
+      margin-top: 0.6rem;
       display: flex;
       flex-wrap: wrap;
       gap: 12px;
@@ -76,47 +101,61 @@
     .multiple-choice label {
       flex: 1 1 45%;
       background: #d8d8d8;
-      border-radius: 8px;
-      padding: 8px 10px;
-      font-weight: 500;
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-weight: 600;
       cursor: pointer;
       user-select: none;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
       color: #444;
       transition: background-color 0.3s ease;
+      box-shadow: 0 0 6px #ccc inset;
+      font-size: 1rem;
     }
 
     .multiple-choice input[type="checkbox"] {
-      width: 18px;
-      height: 18px;
+      width: 20px;
+      height: 20px;
       cursor: pointer;
+      accent-color: #999;
+      transition: accent-color 0.3s ease;
     }
 
     .multiple-choice input[type="checkbox"]:checked + span {
       font-weight: 700;
       color: #333;
     }
+    .multiple-choice input[type="checkbox"]:checked {
+      accent-color: #6c6c6c;
+      box-shadow: 0 0 5px #888 inset;
+    }
 
     button {
       width: 100%;
-      padding: 14px;
-      margin-top: 2rem;
-      font-size: 1.2rem;
+      padding: 16px;
+      margin-top: 2.4rem;
+      font-size: 1.3rem;
       font-weight: 700;
       background: linear-gradient(135deg, #c0c0c0, #a0a0a0);
       border: none;
-      border-radius: 10px;
+      border-radius: 14px;
       color: #222;
       cursor: pointer;
-      box-shadow: 0 4px 8px rgba(100, 100, 100, 0.3);
-      transition: background 0.3s ease;
+      box-shadow: 0 6px 12px rgba(100, 100, 100, 0.35);
+      transition: background 0.3s ease, transform 0.15s ease;
       user-select: none;
+      filter: drop-shadow(0 2px 1px #999);
     }
 
     button:hover {
       background: linear-gradient(135deg, #a0a0a0, #808080);
+    }
+
+    button:active {
+      transform: scale(0.98);
+      box-shadow: 0 3px 6px rgba(80, 80, 80, 0.5);
     }
 
     @media (max-width: 480px) {
@@ -124,35 +163,36 @@
         padding: 15px;
       }
       h2 {
-        font-size: 2rem;
+        font-size: 2.4rem;
       }
       .multiple-choice label {
         flex: 1 1 100%;
+        font-size: 0.95rem;
       }
       button {
-        font-size: 1rem;
-        padding: 12px;
+        font-size: 1.1rem;
+        padding: 14px;
       }
     }
   </style>
 </head>
 <body>
-  <div class="container">
+  <div class="container" role="main" aria-label="Formulario de confirmación de asistencia para Jacqueline">
     <h2>Jacqueline</h2>
 
     <form id="form">
       <label for="nombre">Nombre completo:</label>
-      <input type="text" id="nombre" name="nombre" required />
+      <input type="text" id="nombre" name="nombre" required autocomplete="name" aria-required="true" />
 
       <label for="asistencia">¿Confirmás tu asistencia?</label>
-      <select id="asistencia" name="asistencia" required>
-        <option value="">Seleccionar</option>
+      <select id="asistencia" name="asistencia" required aria-required="true">
+        <option value="" disabled selected>Seleccionar</option>
         <option value="Sí">Sí</option>
         <option value="No">No</option>
       </select>
 
       <label>Restricción alimentaria (marcá todas las que apliquen):</label>
-      <div class="multiple-choice">
+      <div class="multiple-choice" role="group" aria-labelledby="restricciones-label">
         <label><input type="checkbox" name="restricciones" value="Ninguna" /><span>Ninguna</span></label>
         <label><input type="checkbox" name="restricciones" value="Sin TACC" /><span>Sin TACC</span></label>
         <label><input type="checkbox" name="restricciones" value="Diabético" /><span>Diabético</span></label>
@@ -160,20 +200,19 @@
         <label><input type="checkbox" name="restricciones" value="Vegano" /><span>Vegano</span></label>
       </div>
 
-      <button type="submit">Confirmar asistencia</button>
+      <button type="submit" aria-label="Confirmar asistencia">Confirmar asistencia</button>
     </form>
   </div>
 
   <script>
     const scriptURL = "https://script.google.com/macros/s/AKfycbxnQ8pqaJF3pt_9AzUauPEbfGo_5X-udfazKisSDibUhjMN8132NbGoeFGVZRxP9Q8K/exec";
 
-    document.getElementById("form").addEventListener("submit", function(e) {
+    document.getElementById("form").addEventListener("submit", async function(e) {
       e.preventDefault();
 
       const nombre = document.getElementById("nombre").value.trim();
       const asistencia = document.getElementById("asistencia").value;
 
-      // Recopilar restricciones marcadas
       const checkboxes = document.querySelectorAll('input[name="restricciones"]:checked');
       let restricciones = [];
       checkboxes.forEach(cb => restricciones.push(cb.value));
@@ -189,23 +228,34 @@
       formData.append("asistencia", asistencia);
       formData.append("restricciones", restricciones.join(", "));
 
-      fetch(scriptURL, {
-        method: "POST",
-        body: formData
-      })
-      .then(response => response.text())
-      .then(res => {
+      try {
+        const response = await fetch(scriptURL, {
+          method: "POST",
+          body: formData
+        });
+        const text = await response.text();
+
         alert("🎉 ¡Gracias por confirmar tu asistencia!");
         const mensajeWhats = `Hola, soy ${nombre}. Confirmo asistencia: ${asistencia}. Restricciones alimentarias: ${restricciones.join(", ")}. Evento: Mis 15 Años - Jacqueline.`;
         const telefono = "541124572552";
         const urlWhatsapp = `https://wa.me/${telefono}?text=${encodeURIComponent(mensajeWhats)}`;
         window.open(urlWhatsapp, "_blank");
         this.reset();
-      })
-      .catch(error => {
+      } catch (error) {
         alert("❌ Error al enviar: " + error.message);
-      });
+      }
     });
+
+    // PWA: Registro Service Worker
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js').then(registration => {
+          console.log('Service Worker registrado con éxito:', registration.scope);
+        }).catch(err => {
+          console.log('Error al registrar Service Worker:', err);
+        });
+      });
+    }
   </script>
 </body>
 </html>
