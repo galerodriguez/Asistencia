@@ -150,52 +150,27 @@
   </form>
 
   <script>
-  function enviarFormulario() {
-    const nombre = document.getElementById("nombre").value.trim();
-    const asistencia = document.getElementById("asistencia").value;
-    const restricciones = Array.from(document.querySelectorAll('input[name="alimentacion"]:checked'))
-                              .map(el => el.value)
-                              .join(", ") || "No especifica";
+ function doPost(e) {
+  try {
+    const ss = SpreadsheetApp.openById("1aRr6woer6ZMbDwFNt1ImxBxBMsbZd3NXYvrdK0nKHhQ"); // ID de tu Google Sheets
+    const hoja = ss.getSheetByName("CONFIRMACION") || ss.getSheets()[0]; // Nombre de hoja o primera hoja
 
-    if (!nombre || !asistencia) {
-      alert("Por favor completá todos los campos obligatorios.");
-      return;
-    }
+    const nombre = e.parameter.nombre || "Sin nombre";
+    const asistencia = e.parameter.asistencia || "Sin respuesta";
+    const restricciones = e.parameter.restricciones || "No especifica";
+    const timestamp = new Date();
 
-    // 1. Guardar en Google Sheets
-    const urlGoogle = "https://script.google.com/macros/s/AKfycbw2OxOfAOQAsNaeTOYvRT9PxlHYCXRmNoF2Rk1BTDywDIfGxi5wkFF-aPT-jXGuZMLMDg/exec";
-    const formData = new FormData();
-    formData.append("nombre", nombre);
-    formData.append("asistencia", asistencia);
-    formData.append("restricciones", restricciones);
-    formData.append("clave", "MiClaveSecreta123"); // ✅ Clave para autorizar
+    hoja.appendRow([timestamp, nombre, asistencia, restricciones]);
 
-    fetch(urlGoogle, { method: "POST", body: formData })
-      .then(response => response.text())
-      .then(result => {
-        console.log("Guardado en Sheets:", result);
-        document.getElementById("mensajeGracias").style.display = "block";
-      })
-      .catch(async error => {
-        const text = await error.text?.();
-        console.error("Error al guardar:", text || error);
-        alert("ERROR: " + (text || error.message));
-      });
+    return ContentService.createTextOutput("Guardado correctamente")
+      .setMimeType(ContentService.MimeType.TEXT);
 
-    // 2. Enviar por WhatsApp
-    const mensaje = `Hola, soy ${nombre}. Confirmo asistencia: ${asistencia}. Restricciones alimentarias: ${restricciones}. Evento: Mis 15 Años - Jacqueline`;
-    const telefono = "541124572552";
-    const url = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
-    window.open(url, '_blank');
-
-    // 3. Limpiar formulario después de unos segundos
-    setTimeout(() => {
-      document.querySelector("form").reset();
-      setTimeout(() => {
-        document.getElementById("mensajeGracias").style.display = "none";
-      }, 4000);
-    }, 1000);
+  } catch (error) {
+    return ContentService.createTextOutput("Error: " + error.message)
+      .setMimeType(ContentService.MimeType.TEXT);
   }
+}
+
 </script>
 
 
