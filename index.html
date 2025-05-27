@@ -2,11 +2,13 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Confirmar Asistencia</title>
+  <link rel="manifest" href="manifest.json">
   <style>
     body {
       font-family: "Segoe UI", sans-serif;
-      background: #f2f2f2;
+      background: linear-gradient(to right, #f2f2f2, #e0eafc);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -17,10 +19,16 @@
     .container {
       background: white;
       padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
       max-width: 400px;
       width: 90%;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     h2 {
@@ -39,10 +47,16 @@
       padding: 10px;
       margin-top: 6px;
       margin-bottom: 20px;
-      border-radius: 6px;
+      border-radius: 8px;
       border: 1px solid #ccc;
-      box-sizing: border-box;
       font-size: 16px;
+      transition: all 0.2s ease-in-out;
+    }
+
+    input:focus, select:focus {
+      border-color: #007bff;
+      box-shadow: 0 0 4px rgba(0,123,255,0.5);
+      outline: none;
     }
 
     button {
@@ -55,6 +69,7 @@
 
     button:hover {
       background-color: #0056b3;
+      transform: scale(1.02);
     }
   </style>
 </head>
@@ -103,6 +118,13 @@
         alert("❌ Error al enviar: " + error.message);
       });
     });
+
+    // Registro del Service Worker
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js').then(() => {
+        console.log("✅ Service Worker registrado");
+      });
+    }
   </script>
 </body>
 </html>
