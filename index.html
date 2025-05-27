@@ -178,27 +178,29 @@
 </head>
 <body>
   <div class="container" role="main" aria-label="Formulario de confirmación de asistencia para Jacqueline">
-    <h2>Jacqueline</h2>
+    <h2>Mis XV Años - Jacqueline</h2>
 
     <form id="form">
       <label for="nombre">Nombre completo:</label>
       <input type="text" id="nombre" name="nombre" required autocomplete="name" aria-required="true" />
 
-      <label for="asistencia">¿Confirmás tu asistencia?</label>
-      <select id="asistencia" name="asistencia" required aria-required="true">
-        <option value="" disabled selected>Seleccionar</option>
-        <option value="Sí">Sí</option>
-        <option value="No">No</option>
-      </select>
+    
 
-      <label>Restricción alimentaria (marcá todas las que apliquen):</label>
-      <div class="multiple-choice" role="group" aria-labelledby="restricciones-label">
-        <label><input type="checkbox" name="restricciones" value="Ninguna" /><span>Ninguna</span></label>
-        <label><input type="checkbox" name="restricciones" value="Sin TACC" /><span>Sin TACC</span></label>
-        <label><input type="checkbox" name="restricciones" value="Diabético" /><span>Diabético</span></label>
-        <label><input type="checkbox" name="restricciones" value="Hipertenso" /><span>Hipertenso</span></label>
-        <label><input type="checkbox" name="restricciones" value="Vegano" /><span>Vegano</span></label>
-      </div>
+<label for="asistencia">¿Confirmás tu asistencia?</label>
+<select id="asistencia" name="asistencia" required aria-required="true">
+  <option value="Sí" selected>Sí</option>
+  <option value="No">No</option>
+</select>
+
+<label>Restricción alimentaria (marcá todas las que apliquen):</label>
+<div class="multiple-choice" role="group" aria-labelledby="restricciones-label">
+  <label><input type="checkbox" name="restricciones" value="Ninguna" checked /><span>Ninguna</span></label>
+  <label><input type="checkbox" name="restricciones" value="Sin TACC" /><span>Sin TACC</span></label>
+  <label><input type="checkbox" name="restricciones" value="Diabético" /><span>Diabético</span></label>
+  <label><input type="checkbox" name="restricciones" value="Hipertenso" /><span>Hipertenso</span></label>
+  <label><input type="checkbox" name="restricciones" value="Vegano" /><span>Vegano</span></label>
+</div>
+
 
       <button type="submit" aria-label="Confirmar asistencia">Confirmar asistencia</button>
     </form>
