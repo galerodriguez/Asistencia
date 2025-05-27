@@ -2,177 +2,165 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
+  <title>Confirmación de Asistencia - Jacqueline</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Confirmar Asistencia - Jacqueline 15 años</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display&family=Open+Sans&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Segoe+UI&display=swap');
 
     body {
+      background: linear-gradient(135deg, #e0e0e0, #b0b0b0);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #2f2f2f;
       margin: 0;
-      background: linear-gradient(135deg, #2c2c2c, #1a1a1a);
-      font-family: 'Open Sans', sans-serif;
-      color: #ddd;
+      padding: 20px;
       display: flex;
       justify-content: center;
+      min-height: 100vh;
       align-items: center;
-      height: 100vh;
-      padding: 20px;
     }
 
     .container {
-      background: linear-gradient(145deg, #3b3b3b, #252525);
-      border-radius: 20px;
-      box-shadow:
-        0 0 20px 5px rgba(212, 175, 55, 0.7), /* dorado glow */
-        inset 0 0 10px 3px rgba(192, 192, 192, 0.8); /* plateado */
-      padding: 30px 40px;
+      background: #f8f9fa;
       max-width: 420px;
       width: 100%;
-      text-align: center;
+      border-radius: 12px;
+      padding: 30px 25px;
+      box-shadow: 0 0 15px rgba(150, 150, 150, 0.4);
+      border: 2px solid #c0c0c0;
     }
 
     h2 {
       font-family: 'Playfair Display', serif;
+      font-weight: 700;
       font-size: 2.8rem;
-      margin-bottom: 15px;
-      color: #d4af37; /* dorado */
-      text-shadow: 0 0 8px #d4af37cc;
-    }
-
-    form {
-      margin-top: 20px;
-      text-align: left;
+      text-align: center;
+      color: #6a6a6a;
+      margin-bottom: 1.8rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      user-select: none;
     }
 
     label {
       display: block;
-      font-weight: 700;
-      margin-bottom: 6px;
-      color: #cfcfcf;
-      text-shadow: 0 0 3px #aaa;
-      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #555;
+      margin-top: 1rem;
+      user-select: none;
     }
 
     input[type="text"],
-    select,
-    .restricciones {
+    select {
       width: 100%;
-      padding: 12px 15px;
-      border-radius: 12px;
-      border: 2px solid #d4af37;
-      background: #1f1f1f;
-      color: #eee;
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1.5px solid #b0b0b0;
       font-size: 1rem;
-      box-shadow:
-        inset 0 0 5px 1px #c0c0c0aa;
       transition: border-color 0.3s ease;
-      margin-bottom: 22px;
-      font-family: 'Open Sans', sans-serif;
     }
-
     input[type="text"]:focus,
-    select:focus,
-    .restricciones:focus {
+    select:focus {
       outline: none;
-      border-color: #f0db4f;
-      box-shadow:
-        0 0 8px 3px #f0db4faa,
-        inset 0 0 8px 2px #f0db4f88;
+      border-color: #8a8a8a;
+      background-color: #f0f0f0;
     }
 
-    .restricciones {
-      height: 120px;
-      resize: none;
-    }
-
-    /* Multiple Choice como checkboxes */
     .multiple-choice {
+      margin-top: 0.5rem;
       display: flex;
       flex-wrap: wrap;
       gap: 12px;
-      margin-bottom: 28px;
     }
 
     .multiple-choice label {
-      background: #333;
-      border: 1.5px solid #d4af37;
-      border-radius: 12px;
-      padding: 10px 15px;
+      flex: 1 1 45%;
+      background: #d8d8d8;
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-weight: 500;
       cursor: pointer;
       user-select: none;
-      color: #eee;
-      flex: 1 1 calc(50% - 12px);
-      text-align: center;
-      transition: background 0.3s ease, color 0.3s ease;
-      font-weight: 600;
-      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #444;
+      transition: background-color 0.3s ease;
     }
 
     .multiple-choice input[type="checkbox"] {
-      display: none;
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
     }
 
-    .multiple-choice input[type="checkbox"]:checked + label {
-      background: #d4af37;
-      color: #1a1a1a;
-      box-shadow: 0 0 12px #d4af37aa;
-      border-color: #f0db4f;
+    .multiple-choice input[type="checkbox"]:checked + span {
       font-weight: 700;
+      color: #333;
     }
 
     button {
       width: 100%;
       padding: 14px;
+      margin-top: 2rem;
       font-size: 1.2rem;
       font-weight: 700;
-      color: #1a1a1a;
-      background: #d4af37;
+      background: linear-gradient(135deg, #c0c0c0, #a0a0a0);
       border: none;
-      border-radius: 15px;
+      border-radius: 10px;
+      color: #222;
       cursor: pointer;
-      box-shadow: 0 0 20px #d4af37cc;
+      box-shadow: 0 4px 8px rgba(100, 100, 100, 0.3);
       transition: background 0.3s ease;
-      font-family: 'Playfair Display', serif;
+      user-select: none;
     }
 
     button:hover {
-      background: #f0db4f;
-      box-shadow: 0 0 30px #f0db4fdd;
+      background: linear-gradient(135deg, #a0a0a0, #808080);
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 15px;
+      }
+      h2 {
+        font-size: 2rem;
+      }
+      .multiple-choice label {
+        flex: 1 1 100%;
+      }
+      button {
+        font-size: 1rem;
+        padding: 12px;
+      }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h2>Confirmá tu asistencia<br>✨ Jacqueline 15 años ✨</h2>
-    <form id="form">
-      <label for="nombre">Nombre:</label>
-      <input type="text" name="nombre" required placeholder="Tu nombre aquí" />
+    <h2>Jacqueline</h2>
 
-      <label for="asistencia">¿Asistís?</label>
-      <select name="asistencia" required>
+    <form id="form">
+      <label for="nombre">Nombre completo:</label>
+      <input type="text" id="nombre" name="nombre" required />
+
+      <label for="asistencia">¿Confirmás tu asistencia?</label>
+      <select id="asistencia" name="asistencia" required>
+        <option value="">Seleccionar</option>
         <option value="Sí">Sí</option>
         <option value="No">No</option>
       </select>
 
-      <label>Restricciones alimentarias:</label>
+      <label>Restricción alimentaria (marcá todas las que apliquen):</label>
       <div class="multiple-choice">
-        <input type="checkbox" id="ninguna" name="restricciones" value="Ninguna" checked />
-        <label for="ninguna">Ninguna</label>
-
-        <input type="checkbox" id="sin-tacc" name="restricciones" value="Sin TACC" />
-        <label for="sin-tacc">Sin TACC</label>
-
-        <input type="checkbox" id="diabetico" name="restricciones" value="Diabético" />
-        <label for="diabetico">Diabético</label>
-
-        <input type="checkbox" id="hipertenso" name="restricciones" value="Hipertenso" />
-        <label for="hipertenso">Hipertenso</label>
-
-        <input type="checkbox" id="vegano" name="restricciones" value="Vegano" />
-        <label for="vegano">Vegano</label>
+        <label><input type="checkbox" name="restricciones" value="Ninguna" /><span>Ninguna</span></label>
+        <label><input type="checkbox" name="restricciones" value="Sin TACC" /><span>Sin TACC</span></label>
+        <label><input type="checkbox" name="restricciones" value="Diabético" /><span>Diabético</span></label>
+        <label><input type="checkbox" name="restricciones" value="Hipertenso" /><span>Hipertenso</span></label>
+        <label><input type="checkbox" name="restricciones" value="Vegano" /><span>Vegano</span></label>
       </div>
 
-      <button type="submit">Enviar</button>
+      <button type="submit">Confirmar asistencia</button>
     </form>
   </div>
 
@@ -182,19 +170,24 @@
     document.getElementById("form").addEventListener("submit", function(e) {
       e.preventDefault();
 
-      // Sacar los checkboxes seleccionados
-      const checkboxes = document.querySelectorAll('input[name="restricciones"]:checked');
-      const restriccionesSeleccionadas = [];
-      checkboxes.forEach(cb => {
-        if(cb.value !== "Ninguna") restriccionesSeleccionadas.push(cb.value);
-      });
-      // Si "Ninguna" está seleccionada o no hay otras, entonces poner "Ninguna"
-      const restriccionesFinal = restriccionesSeleccionadas.length > 0 ? restriccionesSeleccionadas.join(", ") : "Ninguna";
+      const nombre = document.getElementById("nombre").value.trim();
+      const asistencia = document.getElementById("asistencia").value;
 
-      // Construir FormData con restricciones concatenadas en 1 campo
-      const formData = new FormData(this);
-      formData.delete("restricciones"); // borrar los checkboxes que van múltiples
-      formData.append("restricciones", restriccionesFinal);
+      // Recopilar restricciones marcadas
+      const checkboxes = document.querySelectorAll('input[name="restricciones"]:checked');
+      let restricciones = [];
+      checkboxes.forEach(cb => restricciones.push(cb.value));
+      if (restricciones.length === 0) restricciones.push("Ninguna");
+
+      if (!nombre || !asistencia) {
+        alert("Por favor, completá todos los campos obligatorios.");
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append("nombre", nombre);
+      formData.append("asistencia", asistencia);
+      formData.append("restricciones", restricciones.join(", "));
 
       fetch(scriptURL, {
         method: "POST",
@@ -202,12 +195,12 @@
       })
       .then(response => response.text())
       .then(res => {
-        alert("🎉 Gracias por confirmar, ¡Jacqueline te espera!");
-        const nombre = formData.get("nombre");
-        const asistencia = formData.get("asistencia");
-        const msg = `Hola! Soy ${nombre} y confirmo que ${asistencia === 'Sí' ? 'voy a asistir' : 'no voy a asistir'}.`;
-        const urlWhatsapp = `https://wa.me/541124572552?text=${encodeURIComponent(msg)}`;
-        window.location.href = urlWhatsapp;
+        alert("🎉 ¡Gracias por confirmar tu asistencia!");
+        const mensajeWhats = `Hola, soy ${nombre}. Confirmo asistencia: ${asistencia}. Restricciones alimentarias: ${restricciones.join(", ")}. Evento: Mis 15 Años - Jacqueline.`;
+        const telefono = "541124572552";
+        const urlWhatsapp = `https://wa.me/${telefono}?text=${encodeURIComponent(mensajeWhats)}`;
+        window.open(urlWhatsapp, "_blank");
+        this.reset();
       })
       .catch(error => {
         alert("❌ Error al enviar: " + error.message);
