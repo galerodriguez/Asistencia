@@ -1,18 +1,17 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Confirmación de Asistencia - Jacqueline</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
       background: linear-gradient(to right, #f8f8f8, #e6e6e6);
-      padding: 0;
       margin: 0;
+      padding: 0;
       color: #333;
     }
-
     .header {
       background-image: url('https://images.unsplash.com/photo-1594824476967-48c8b9642732?auto=format&fit=crop&w=1350&q=80');
       background-size: cover;
@@ -24,7 +23,6 @@
       font-weight: bold;
       text-shadow: 1px 1px 5px #000;
     }
-
     form {
       background: white;
       max-width: 500px;
@@ -36,19 +34,16 @@
       position: relative;
       z-index: 2;
     }
-
     h2 {
       text-align: center;
       color: goldenrod;
       margin-bottom: 1.5rem;
     }
-
     label {
       font-weight: bold;
       margin-top: 1rem;
       display: block;
     }
-
     input[type="text"],
     select {
       width: 100%;
@@ -57,17 +52,14 @@
       border-radius: 6px;
       border: 1px solid #ccc;
     }
-
     .checkbox-group {
       margin-top: 0.5rem;
     }
-
     .checkbox-group label {
       display: block;
       font-weight: normal;
       margin: 0.3rem 0;
     }
-
     button {
       background: goldenrod;
       color: white;
@@ -80,31 +72,17 @@
       cursor: pointer;
       transition: background 0.3s;
     }
-
-    button:disabled {
-      background: #999;
-      cursor: not-allowed;
-    }
-
-    button:hover:enabled {
+    button:hover {
       background: #c4a300;
     }
-
     #mensajeGracias {
       display: none;
       text-align: center;
-      font-size: 1.4rem;
+      font-size: 1.2rem;
       color: green;
       margin-top: 1rem;
       font-weight: bold;
-      animation: fadeIn 1s ease-in-out;
     }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
     @media (max-width: 600px) {
       .header {
         font-size: 1.5rem;
@@ -127,7 +105,7 @@
     <h2>Confirmación de Asistencia</h2>
 
     <label for="nombre">Nombre completo:</label>
-    <input type="text" id="nombre" required>
+    <input type="text" id="nombre" required />
 
     <label for="asistencia">¿Confirmás tu asistencia?</label>
     <select id="asistencia" required>
@@ -138,65 +116,60 @@
 
     <label>Restricción alimentaria (puede marcar varias):</label>
     <div class="checkbox-group">
-      <label><input type="checkbox" name="alimentacion" value="Ninguna"> Ninguna</label>
-      <label><input type="checkbox" name="alimentacion" value="SIN TACC"> SIN TACC</label>
-      <label><input type="checkbox" name="alimentacion" value="Vegano"> Vegano</label>
-      <label><input type="checkbox" name="alimentacion" value="Hipertensión"> Hipertensión</label>
-      <label><input type="checkbox" name="alimentacion" value="Diabético"> Diabético</label>
+      <label><input type="checkbox" name="alimentacion" value="Ninguna" /> Ninguna</label>
+      <label><input type="checkbox" name="alimentacion" value="SIN TACC" /> SIN TACC</label>
+      <label><input type="checkbox" name="alimentacion" value="Vegano" /> Vegano</label>
+      <label><input type="checkbox" name="alimentacion" value="Hipertensión" /> Hipertensión</label>
+      <label><input type="checkbox" name="alimentacion" value="Diabético" /> Diabético</label>
     </div>
 
-    <button type="submit" id="botonConfirmar">Confirmar por WhatsApp</button>
-    <div id="mensajeGracias">🎉 ¡Gracias por confirmar! 🎉</div>
+    <button type="submit">Confirmar por WhatsApp</button>
+    <div id="mensajeGracias">¡Gracias por confirmar! 🎉</div>
   </form>
 
   <script>
-<script>
-  function enviarFormulario() {
-    const nombre = document.getElementById("nombre").value.trim();
-    const asistencia = document.getElementById("asistencia").value;
-    const restricciones = Array.from(document.querySelectorAll('input[name="alimentacion"]:checked'))
-                              .map(el => el.value)
-                              .join(", ") || "No especifica";
+    function enviarFormulario() {
+      const nombre = document.getElementById("nombre").value.trim();
+      const asistencia = document.getElementById("asistencia").value;
+      const restricciones = Array.from(document.querySelectorAll('input[name="alimentacion"]:checked'))
+                                .map(el => el.value)
+                                .join(", ") || "No especifica";
 
-    if (!nombre || !asistencia) {
-      alert("Por favor completá todos los campos obligatorios.");
-      return;
-    }
+      if (!nombre || !asistencia) {
+        alert("Por favor completá todos los campos obligatorios.");
+        return;
+      }
 
-    const urlGoogle = "https://script.google.com/macros/s/AKfycbw2OxOfAOQAsNaeTOYvRT9PxlHYCXRmNoF2Rk1BTDywDIfGxi5wkFF-aPT-jXGuZMLMDg/exec"; // tu URL de deploy
+      const urlGoogle = "https://script.google.com/macros/s/AKfycbw2OxOfAOQAsNaeTOYvRT9PxlHYCXRmNoF2Rk1BTDywDIfGxi5wkFF-aPT-jXGuZMLMDg/exec";
 
-    const formData = new FormData();
-    formData.append("nombre", nombre);
-    formData.append("asistencia", asistencia);
-    formData.append("restricciones", restricciones);
+      const formData = new FormData();
+      formData.append("nombre", nombre);
+      formData.append("asistencia", asistencia);
+      formData.append("restricciones", restricciones);
 
-    fetch(urlGoogle, { method: "POST", body: formData })
-      .then(response => response.text())
-      .then(result => {
-        console.log("Guardado en Sheets:", result);
-        document.getElementById("mensajeGracias").style.display = "block";
-      })
-      .catch(error => {
-        console.error("Error al guardar en Sheets:", error);
-      });
+      fetch(urlGoogle, { method: "POST", body: formData })
+        .then(response => response.text())
+        .then(result => {
+          console.log("Guardado en Sheets:", result);
+          document.getElementById("mensajeGracias").style.display = "block";
+        })
+        .catch(error => {
+          console.error("Error al guardar en Sheets:", error);
+        });
 
-    // Enviar por WhatsApp
-    const mensaje = `Hola, soy ${nombre}. Confirmo asistencia: ${asistencia}. Restricciones alimentarias: ${restricciones}. Evento: Mis 15 Años - Jacqueline`;
-    const telefono = "541124572552";
-    const url = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
-    window.open(url, '_blank');
+      const mensaje = `Hola, soy ${nombre}. Confirmo asistencia: ${asistencia}. Restricciones alimentarias: ${restricciones}. Evento: Mis 15 Años - Jacqueline`;
+      const telefono = "541124572552";
+      const url = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
+      window.open(url, "_blank");
 
-    // Limpiar formulario
-    setTimeout(() => {
-      document.querySelector("form").reset();
       setTimeout(() => {
-        document.getElementById("mensajeGracias").style.display = "none";
-      }, 4000);
-    }, 1000);
-  }
-</script>
-
-
+        document.querySelector("form").reset();
+        setTimeout(() => {
+          document.getElementById("mensajeGracias").style.display = "none";
+        }, 4000);
+      }, 1000);
+    }
+  </script>
 
 </body>
 </html>
