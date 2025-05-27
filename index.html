@@ -150,58 +150,54 @@
   </form>
 
   <script>
-    function enviarFormulario() {
-      const nombre = document.getElementById("nombre").value.trim();
-      const asistencia = document.getElementById("asistencia").value;
-      const restricciones = Array.from(document.querySelectorAll('input[name="alimentacion"]:checked'))
-                                .map(el => el.value)
-                                .join(", ") || "No especifica";
-      const boton = document.getElementById("botonConfirmar");
+  function enviarFormulario() {
+    const nombre = document.getElementById("nombre").value.trim();
+    const asistencia = document.getElementById("asistencia").value;
+    const restricciones = Array.from(document.querySelectorAll('input[name="alimentacion"]:checked'))
+                              .map(el => el.value)
+                              .join(", ") || "No especifica";
 
-      if (!nombre || !asistencia) {
-        alert("Por favor, completá tu nombre y seleccioná si vas a asistir.");
-        return;
-      }
-
-      boton.disabled = true;
-
-      // 1. Guardar en Google Sheets
-      const urlGoogle = "https://script.google.com/macros/s/AKfycbw2OxOfAOQAsNaeTOYvRT9PxlHYCXRmNoF2Rk1BTDywDIfGxi5wkFF-aPT-jXGuZMLMDg/exec";
-      const claveSecreta = "MiClaveSecreta123"; // 🔐 misma clave en el Apps Script
-
-      const formData = new FormData();
-      formData.append("nombre", nombre);
-      formData.append("asistencia", asistencia);
-      formData.append("restricciones", restricciones);
-      formData.append("clave", claveSecreta);
-
-      fetch(urlGoogle, { method: "POST", body: formData })
-        .then(response => response.text())
-        .then(result => {
-          console.log("Guardado en Sheets:", result);
-          document.getElementById("mensajeGracias").style.display = "block";
-        })
-        .catch(error => {
-          console.error("Error al guardar en Sheets:", error);
-          alert("Hubo un error al guardar los datos.");
-        });
-
-      // 2. Enviar por WhatsApp
-      const telefono = "541124572552";
-      const mensaje = `Hola, soy ${nombre}. Confirmo asistencia: ${asistencia}. Restricciones alimentarias: ${restricciones}. Evento: Mis 15 Años - Jacqueline`;
-      const url = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
-      window.open(url, '_blank');
-
-      // 3. Limpiar formulario después de unos segundos
-      setTimeout(() => {
-        document.querySelector("form").reset();
-        boton.disabled = false;
-        setTimeout(() => {
-          document.getElementById("mensajeGracias").style.display = "none";
-        }, 4000);
-      }, 1000);
+    if (!nombre || !asistencia) {
+      alert("Por favor completá todos los campos obligatorios.");
+      return;
     }
-  </script>
+
+    // 1. Guardar en Google Sheets
+    const urlGoogle = "https://script.google.com/macros/s/AKfycbw2OxOfAOQAsNaeTOYvRT9PxlHYCXRmNoF2Rk1BTDywDIfGxi5wkFF-aPT-jXGuZMLMDg/exec";
+    const formData = new FormData();
+    formData.append("nombre", nombre);
+    formData.append("asistencia", asistencia);
+    formData.append("restricciones", restricciones);
+    formData.append("clave", "MiClaveSecreta123"); // ✅ Clave para autorizar
+
+    fetch(urlGoogle, { method: "POST", body: formData })
+      .then(response => response.text())
+      .then(result => {
+        console.log("Guardado en Sheets:", result);
+        document.getElementById("mensajeGracias").style.display = "block";
+      })
+      .catch(async error => {
+        const text = await error.text?.();
+        console.error("Error al guardar:", text || error);
+        alert("ERROR: " + (text || error.message));
+      });
+
+    // 2. Enviar por WhatsApp
+    const mensaje = `Hola, soy ${nombre}. Confirmo asistencia: ${asistencia}. Restricciones alimentarias: ${restricciones}. Evento: Mis 15 Años - Jacqueline`;
+    const telefono = "541124572552";
+    const url = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
+    window.open(url, '_blank');
+
+    // 3. Limpiar formulario después de unos segundos
+    setTimeout(() => {
+      document.querySelector("form").reset();
+      setTimeout(() => {
+        document.getElementById("mensajeGracias").style.display = "none";
+      }, 4000);
+    }, 1000);
+  }
+</script>
+
 
 </body>
 </html>
