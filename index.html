@@ -2,83 +2,151 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Confirmar Asistencia</title>
-  <link rel="manifest" href="manifest.json">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Confirmar Asistencia - Jacqueline 15 años</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display&family=Open+Sans&display=swap');
+
     body {
-      font-family: "Segoe UI", sans-serif;
-      background: linear-gradient(to right, #f2f2f2, #e0eafc);
+      margin: 0;
+      background: linear-gradient(135deg, #2c2c2c, #1a1a1a);
+      font-family: 'Open Sans', sans-serif;
+      color: #ddd;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
-      margin: 0;
+      padding: 20px;
     }
 
     .container {
-      background: white;
-      padding: 30px;
-      border-radius: 16px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-      max-width: 400px;
-      width: 90%;
-      animation: fadeIn 1s ease-in-out;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
+      background: linear-gradient(145deg, #3b3b3b, #252525);
+      border-radius: 20px;
+      box-shadow:
+        0 0 20px 5px rgba(212, 175, 55, 0.7), /* dorado glow */
+        inset 0 0 10px 3px rgba(192, 192, 192, 0.8); /* plateado */
+      padding: 30px 40px;
+      max-width: 420px;
+      width: 100%;
+      text-align: center;
     }
 
     h2 {
-      text-align: center;
-      color: #333;
-      margin-bottom: 20px;
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem;
+      margin-bottom: 15px;
+      color: #d4af37; /* dorado */
+      text-shadow: 0 0 8px #d4af37cc;
+    }
+
+    form {
+      margin-top: 20px;
+      text-align: left;
     }
 
     label {
-      font-weight: bold;
-      color: #555;
+      display: block;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: #cfcfcf;
+      text-shadow: 0 0 3px #aaa;
+      font-size: 1.1rem;
     }
 
-    input, select, button {
+    input[type="text"],
+    select,
+    .restricciones {
       width: 100%;
-      padding: 10px;
-      margin-top: 6px;
-      margin-bottom: 20px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      font-size: 16px;
-      transition: all 0.2s ease-in-out;
+      padding: 12px 15px;
+      border-radius: 12px;
+      border: 2px solid #d4af37;
+      background: #1f1f1f;
+      color: #eee;
+      font-size: 1rem;
+      box-shadow:
+        inset 0 0 5px 1px #c0c0c0aa;
+      transition: border-color 0.3s ease;
+      margin-bottom: 22px;
+      font-family: 'Open Sans', sans-serif;
     }
 
-    input:focus, select:focus {
-      border-color: #007bff;
-      box-shadow: 0 0 4px rgba(0,123,255,0.5);
+    input[type="text"]:focus,
+    select:focus,
+    .restricciones:focus {
       outline: none;
+      border-color: #f0db4f;
+      box-shadow:
+        0 0 8px 3px #f0db4faa,
+        inset 0 0 8px 2px #f0db4f88;
+    }
+
+    .restricciones {
+      height: 120px;
+      resize: none;
+    }
+
+    /* Multiple Choice como checkboxes */
+    .multiple-choice {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .multiple-choice label {
+      background: #333;
+      border: 1.5px solid #d4af37;
+      border-radius: 12px;
+      padding: 10px 15px;
+      cursor: pointer;
+      user-select: none;
+      color: #eee;
+      flex: 1 1 calc(50% - 12px);
+      text-align: center;
+      transition: background 0.3s ease, color 0.3s ease;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    .multiple-choice input[type="checkbox"] {
+      display: none;
+    }
+
+    .multiple-choice input[type="checkbox"]:checked + label {
+      background: #d4af37;
+      color: #1a1a1a;
+      box-shadow: 0 0 12px #d4af37aa;
+      border-color: #f0db4f;
+      font-weight: 700;
     }
 
     button {
-      background-color: #007bff;
-      color: white;
-      font-weight: bold;
+      width: 100%;
+      padding: 14px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #1a1a1a;
+      background: #d4af37;
       border: none;
+      border-radius: 15px;
       cursor: pointer;
+      box-shadow: 0 0 20px #d4af37cc;
+      transition: background 0.3s ease;
+      font-family: 'Playfair Display', serif;
     }
 
     button:hover {
-      background-color: #0056b3;
-      transform: scale(1.02);
+      background: #f0db4f;
+      box-shadow: 0 0 30px #f0db4fdd;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h2>Confirmá tu asistencia 🎉</h2>
+    <h2>Confirmá tu asistencia<br>✨ Jacqueline 15 años ✨</h2>
     <form id="form">
       <label for="nombre">Nombre:</label>
-      <input type="text" name="nombre" required>
+      <input type="text" name="nombre" required placeholder="Tu nombre aquí" />
 
       <label for="asistencia">¿Asistís?</label>
       <select name="asistencia" required>
@@ -86,8 +154,23 @@
         <option value="No">No</option>
       </select>
 
-      <label for="restricciones">Restricciones alimentarias:</label>
-      <input type="text" name="restricciones">
+      <label>Restricciones alimentarias:</label>
+      <div class="multiple-choice">
+        <input type="checkbox" id="ninguna" name="restricciones" value="Ninguna" checked />
+        <label for="ninguna">Ninguna</label>
+
+        <input type="checkbox" id="sin-tacc" name="restricciones" value="Sin TACC" />
+        <label for="sin-tacc">Sin TACC</label>
+
+        <input type="checkbox" id="diabetico" name="restricciones" value="Diabético" />
+        <label for="diabetico">Diabético</label>
+
+        <input type="checkbox" id="hipertenso" name="restricciones" value="Hipertenso" />
+        <label for="hipertenso">Hipertenso</label>
+
+        <input type="checkbox" id="vegano" name="restricciones" value="Vegano" />
+        <label for="vegano">Vegano</label>
+      </div>
 
       <button type="submit">Enviar</button>
     </form>
@@ -99,7 +182,19 @@
     document.getElementById("form").addEventListener("submit", function(e) {
       e.preventDefault();
 
+      // Sacar los checkboxes seleccionados
+      const checkboxes = document.querySelectorAll('input[name="restricciones"]:checked');
+      const restriccionesSeleccionadas = [];
+      checkboxes.forEach(cb => {
+        if(cb.value !== "Ninguna") restriccionesSeleccionadas.push(cb.value);
+      });
+      // Si "Ninguna" está seleccionada o no hay otras, entonces poner "Ninguna"
+      const restriccionesFinal = restriccionesSeleccionadas.length > 0 ? restriccionesSeleccionadas.join(", ") : "Ninguna";
+
+      // Construir FormData con restricciones concatenadas en 1 campo
       const formData = new FormData(this);
+      formData.delete("restricciones"); // borrar los checkboxes que van múltiples
+      formData.append("restricciones", restriccionesFinal);
 
       fetch(scriptURL, {
         method: "POST",
@@ -107,7 +202,7 @@
       })
       .then(response => response.text())
       .then(res => {
-        alert("🎊 ¡Gracias por confirmar!");
+        alert("🎉 Gracias por confirmar, ¡Jacqueline te espera!");
         const nombre = formData.get("nombre");
         const asistencia = formData.get("asistencia");
         const msg = `Hola! Soy ${nombre} y confirmo que ${asistencia === 'Sí' ? 'voy a asistir' : 'no voy a asistir'}.`;
@@ -118,13 +213,6 @@
         alert("❌ Error al enviar: " + error.message);
       });
     });
-
-    // Registro del Service Worker
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('sw.js').then(() => {
-        console.log("✅ Service Worker registrado");
-      });
-    }
   </script>
 </body>
 </html>
