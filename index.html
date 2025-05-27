@@ -2,293 +2,158 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>Confirmación de Asistencia - Jacqueline</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="manifest" href="manifest.json" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Confirmar Asistencia a los 15 de Jacqueline</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Segoe+UI&display=swap');
-
-    /* Reset */
-    * {
-      box-sizing: border-box;
-    }
-
-  
-     body {
-      margin: 0; padding: 20px;
-      background: linear-gradient(135deg, #e0e0e0, #b0b0b0);
+    body {
+      margin: 0;
+      padding: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      color: #2f2f2f;
+      background: linear-gradient(to right, #f8f9fa, #d1d1d1);
+      color: #333;
       display: flex;
       justify-content: center;
       align-items: center;
-      min-height: 100vh;
-      overflow-x: hidden;
+      height: 100vh;
+      animation: fadeIn 2s ease-in-out;
     }
 
-     .multiple-choice {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 20px;
-  }
-
-  .multiple-choice label {
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid #ccc;
-    border-radius: 12px;
-    padding: 6px 12px;
-    font-size: 0.95rem;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-  }
-
-  .multiple-choice input[type="checkbox"] {
-    accent-color: silver;
-    transform: scale(1.1);
-  }
-
-  .multiple-choice label:hover {
-    background: rgba(255, 255, 255, 0.2);
-  }
-
-    .container {
-      background: #f8f9fa;
-      max-width: 420px;
-      width: 100%;
-      border-radius: 12px;
-      padding: 30px 25px;
-      box-shadow: 0 0 20px rgba(150, 150, 150, 0.45);
-      border: 2px solid #c0c0c0;
-      animation: fadeInUp 0.8s ease forwards;
-      opacity: 0;
-      transform: translateY(30px);
-    }
-
-    @keyframes fadeInUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    form {
+      background-color: white;
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(192,192,192,0.6);
+      max-width: 400px;
+      width: 90%;
     }
 
     h2 {
-      font-family: 'Playfair Display', serif;
-      font-weight: 700;
-      font-size: 3rem;
+      font-family: 'Brush Script MT', cursive;
+      font-size: 2.5rem;
+      color: #777;
       text-align: center;
-      color: #6a6a6a;
-      margin-bottom: 2rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      user-select: none;
-      animation: fadeInText 1.5s ease forwards;
-      opacity: 0;
-    }
-
-    @keyframes fadeInText {
-      to {opacity: 1;}
+      margin-bottom: 1.5rem;
     }
 
     label {
       display: block;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-      color: #555;
-      margin-top: 1.3rem;
-      user-select: none;
+      margin-top: 1rem;
+      font-weight: bold;
     }
 
     input[type="text"],
     select {
       width: 100%;
-      padding: 12px 14px;
-      border-radius: 10px;
-      border: 1.8px solid #b0b0b0;
-      font-size: 1.05rem;
-      transition: border-color 0.4s ease, box-shadow 0.4s ease;
-      background: #fafafa;
-      font-weight: 500;
-      outline-offset: 2px;
-    }
-    input[type="text"]:focus,
-    select:focus {
-      border-color: #8a8a8a;
-      box-shadow: 0 0 8px 2px #a9a9a9cc;
-      background-color: #f0f0f0;
+      padding: 0.5rem;
+      margin-top: 0.5rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
     }
 
-    .multiple-choice {
-      margin-top: 0.6rem;
+    .checkbox-group {
       display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    .multiple-choice label {
-      flex: 1 1 45%;
-      background: #d8d8d8;
-      border-radius: 10px;
-      padding: 10px 14px;
-      font-weight: 600;
-      cursor: pointer;
-      user-select: none;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: #444;
-      transition: background-color 0.3s ease;
-      box-shadow: 0 0 6px #ccc inset;
-      font-size: 1rem;
-    }
-
-    .multiple-choice input[type="checkbox"] {
-      width: 20px;
-      height: 20px;
-      cursor: pointer;
-      accent-color: #999;
-      transition: accent-color 0.3s ease;
-    }
-
-    .multiple-choice input[type="checkbox"]:checked + span {
-      font-weight: 700;
-      color: #333;
-    }
-    .multiple-choice input[type="checkbox"]:checked {
-      accent-color: #6c6c6c;
-      box-shadow: 0 0 5px #888 inset;
+      flex-direction: column;
+      gap: 0.3rem;
+      margin-top: 0.5rem;
     }
 
     button {
+      margin-top: 1.5rem;
       width: 100%;
-      padding: 16px;
-      margin-top: 2.4rem;
-      font-size: 1.3rem;
-      font-weight: 700;
-      background: linear-gradient(135deg, #c0c0c0, #a0a0a0);
+      padding: 0.7rem;
+      background-color: #aaa;
       border: none;
-      border-radius: 14px;
-      color: #222;
+      color: white;
+      font-weight: bold;
+      border-radius: 10px;
       cursor: pointer;
-      box-shadow: 0 6px 12px rgba(100, 100, 100, 0.35);
-      transition: background 0.3s ease, transform 0.15s ease;
-      user-select: none;
-      filter: drop-shadow(0 2px 1px #999);
     }
 
     button:hover {
-      background: linear-gradient(135deg, #a0a0a0, #808080);
+      background-color: #888;
     }
 
-    button:active {
-      transform: scale(0.98);
-      box-shadow: 0 3px 6px rgba(80, 80, 80, 0.5);
-    }
-
-    @media (max-width: 480px) {
-      body {
-        padding: 15px;
-      }
-      h2 {
-        font-size: 2.4rem;
-      }
-      .multiple-choice label {
-        flex: 1 1 100%;
-        font-size: 0.95rem;
-      }
-      button {
-        font-size: 1.1rem;
-        padding: 14px;
-      }
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: scale(0.95); }
+      100% { opacity: 1; transform: scale(1); }
     }
   </style>
 </head>
 <body>
-  <div class="container" role="main" aria-label="Formulario de confirmación de asistencia para Jacqueline">
-    <h2>Mis XV Años - Jacqueline</h2>
+  <form id="form">
+    <h2>Confirmá tu asistencia ✨</h2>
 
-    <form id="form">
-      <label for="nombre">Nombre completo:</label>
-      <input type="text" id="nombre" name="nombre" required autocomplete="name" aria-required="true" />
+    <label>Nombre:</label>
+    <input type="text" name="nombre" required />
 
-    
+    <label>¿Asistís?</label>
+    <select name="asistencia" required>
+      <option value="Sí" selected>Sí</option>
+      <option value="No">No</option>
+    </select>
 
-<label for="asistencia">¿Confirmás tu asistencia?</label>
-<select id="asistencia" name="asistencia" required aria-required="true">
-  <option value="Sí" selected>Sí</option>
-  <option value="No">No</option>
-</select>
+    <label>Restricciones alimentarias:</label>
+    <div class="checkbox-group">
+      <label><input type="radio" name="restricciones" value="Ninguna" checked /> Ninguna</label>
+      <label><input type="radio" name="restricciones" value="Sin TACC" /> Sin TACC</label>
+      <label><input type="radio" name="restricciones" value="Diabético" /> Diabético</label>
+      <label><input type="radio" name="restricciones" value="Hipertenso" /> Hipertenso</label>
+      <label><input type="radio" name="restricciones" value="Vegano" /> Vegano</label>
+    </div>
 
-<label>Restricción alimentaria (marcá todas las que apliquen):</label>
-<div class="multiple-choice">
-  <label><input type="checkbox" name="restricciones" value="Ninguna" checked><span>Ninguna</span></label>
-  <label><input type="checkbox" name="restricciones" value="Sin TACC"><span>Sin TACC</span></label>
-  <label><input type="checkbox" name="restricciones" value="Diabético"><span>Diabético</span></label>
-  <label><input type="checkbox" name="restricciones" value="Hipertenso"><span>Hipertenso</span></label>
-  <label><input type="checkbox" name="restricciones" value="Vegano"><span>Vegano</span></label>
-</div>
-
-
-
-      <button type="submit" aria-label="Confirmar asistencia">Confirmar asistencia</button>
-    </form>
-  </div>
+    <button type="submit">Enviar</button>
+  </form>
 
   <script>
     const scriptURL = "https://script.google.com/macros/s/AKfycbxnQ8pqaJF3pt_9AzUauPEbfGo_5X-udfazKisSDibUhjMN8132NbGoeFGVZRxP9Q8K/exec";
 
-    document.getElementById("form").addEventListener("submit", async function(e) {
+    document.getElementById("form").addEventListener("submit", function(e) {
       e.preventDefault();
 
-      const nombre = document.getElementById("nombre").value.trim();
-      const asistencia = document.getElementById("asistencia").value;
+      const formData = new FormData(this);
+      const nombre = formData.get("nombre");
+      const asistencia = formData.get("asistencia");
 
-      const checkboxes = document.querySelectorAll('input[name="restricciones"]:checked');
-      let restricciones = [];
-      checkboxes.forEach(cb => restricciones.push(cb.value));
-      if (restricciones.length === 0) restricciones.push("Ninguna");
+      fetch(scriptURL, {
+        method: "POST",
+        body: formData
+      })
+      .then(response => response.text())
+      .then(res => {
+        const mensaje = asistencia === "Sí"
+          ? `<h1 style='font-size: 2.5rem; color: #555;'>🎉 ¡Gracias por confirmar, ${nombre}!</h1>
+             <p style='font-size: 1.2rem; color: #777;'>Jacqueline se alegrará de verte allí ✨</p>
+             <div style='font-size: 3rem; margin-top: 1rem;'>💃💌🎊</div>`
+          : `<h1 style='font-size: 2.5rem; color: #555;'>💌 Gracias por avisar, ${nombre}</h1>
+             <p style='font-size: 1.2rem; color: #777;'>Sentiremos tu ausencia, pero tu mensaje fue recibido con cariño.</p>
+             <div style='font-size: 3rem; margin-top: 1rem;'>🌙💫🕊️</div>`;
 
-      if (!nombre || !asistencia) {
-        alert("Por favor, completá todos los campos obligatorios.");
-        return;
-      }
+        document.body.innerHTML = `
+          <div style="
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            background: linear-gradient(to right, #f8f9fa, #d1d1d1);
+            font-family: 'Segoe UI', sans-serif;
+            animation: fadeIn 2s ease-in-out;">
+            ${mensaje}
+          </div>
 
-      const formData = new FormData();
-      formData.append("nombre", nombre);
-      formData.append("asistencia", asistencia);
-      formData.append("restricciones", restricciones.join(", "));
-
-      try {
-        const response = await fetch(scriptURL, {
-          method: "POST",
-          body: formData
-        });
-        const text = await response.text();
-
-        alert("🎉 ¡Gracias por confirmar tu asistencia!");
-        const mensajeWhats = `Hola, soy ${nombre}. Confirmo asistencia: ${asistencia}. Restricciones alimentarias: ${restricciones.join(", ")}. Evento: Mis 15 Años - Jacqueline.`;
-        const telefono = "541124572552";
-        const urlWhatsapp = `https://wa.me/${telefono}?text=${encodeURIComponent(mensajeWhats)}`;
-        window.open(urlWhatsapp, "_blank");
-        this.reset();
-      } catch (error) {
+          <style>
+            @keyframes fadeIn {
+              0% { opacity: 0; transform: scale(0.95); }
+              100% { opacity: 1; transform: scale(1); }
+            }
+          </style>
+        `;
+      })
+      .catch(error => {
         alert("❌ Error al enviar: " + error.message);
-      }
-    });
-
-    // PWA: Registro Service Worker
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('sw.js').then(registration => {
-          console.log('Service Worker registrado con éxito:', registration.scope);
-        }).catch(err => {
-          console.log('Error al registrar Service Worker:', err);
-        });
       });
-    }
+    });
   </script>
 </body>
 </html>
