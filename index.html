@@ -1,155 +1,188 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Confirmación de Asistencia - 15 Años</title>
-<style>
-  body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #b4b4b4, #f9f9f9, #d4af37);
-    padding: 2rem;
-    margin: 0;
-  }
-  form {
-    background: white;
-    padding: 2rem;
-    max-width: 450px;
-    margin: auto;
-    border-radius: 15px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.15);
-  }
-  h2 {
-    color: #a58f47;
-    text-align: center;
-  }
-  label {
-    display: block;
-    margin-top: 1rem;
-    font-weight: bold;
-  }
-  input[type="text"],
-  select {
-    width: 100%;
-    padding: 0.5rem;
-    margin-top: 0.3rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  .checkbox-group label {
-    font-weight: normal;
-    margin-top: 0.3rem;
-    display: block;
-  }
-  button {
-    margin-top: 1.5rem;
-    background-color: #25D366;
-    color: white;
-    border: none;
-    padding: 0.8rem;
-    width: 100%;
-    font-size: 1rem;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  button:hover {
-    background-color: #128C7E;
-  }
-  #mensajeGracias {
-    text-align: center;
-    margin-top: 1rem;
-    color: #444;
-    font-weight: bold;
-  }
-  @media (max-width: 600px) {
-    form {
-      padding: 1rem;
+  <meta charset="UTF-8">
+  <title>Confirmación de Asistencia - Jacqueline</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #f8f8f8, #e6e6e6);
+      padding: 0;
+      margin: 0;
+      color: #333;
     }
-  }
-</style>
+
+    .header {
+      background-image: url('https://images.unsplash.com/photo-1594824476967-48c8b9642732?auto=format&fit=crop&w=1350&q=80');
+      background-size: cover;
+      background-position: center;
+      text-align: center;
+      color: white;
+      padding: 3rem 1rem;
+      font-size: 2rem;
+      font-weight: bold;
+      text-shadow: 1px 1px 5px #000;
+    }
+
+    form {
+      background: white;
+      max-width: 500px;
+      margin: -2rem auto 2rem;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      border: 3px solid gold;
+      position: relative;
+      z-index: 2;
+    }
+
+    h2 {
+      text-align: center;
+      color: goldenrod;
+      margin-bottom: 1.5rem;
+    }
+
+    label {
+      font-weight: bold;
+      margin-top: 1rem;
+      display: block;
+    }
+
+    input[type="text"],
+    select {
+      width: 100%;
+      padding: 0.7rem;
+      margin-top: 0.3rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    .checkbox-group {
+      margin-top: 0.5rem;
+    }
+
+    .checkbox-group label {
+      display: block;
+      font-weight: normal;
+      margin: 0.3rem 0;
+    }
+
+    button {
+      background: goldenrod;
+      color: white;
+      border: none;
+      padding: 1rem;
+      margin-top: 1.5rem;
+      width: 100%;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #c4a300;
+    }
+
+    #mensajeGracias {
+      display: none;
+      text-align: center;
+      font-size: 1.2rem;
+      color: green;
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+
+    @media (max-width: 600px) {
+      .header {
+        font-size: 1.5rem;
+        padding: 2rem 1rem;
+      }
+      form {
+        padding: 1.5rem;
+        margin: -1.5rem auto 2rem;
+      }
+    }
+  </style>
 </head>
 <body>
 
-<form id="confirmacionForm">
-  <h2>Confirmación de </h2>
-
-  <label for="nombre">Nombre completo:</label>
-  <input type="text" id="nombre" name="nombre" required />
-
-  <label for="asistencia">¿Confirmás tu asistencia?</label>
-  <select id="asistencia" name="asistencia" required>
-    <option value="">Seleccionar</option>
-    <option value="Sí">Sí</option>
-    <option value="No">No</option>
-  </select>
-
-  <label>Restricción alimentaria (puede marcar varias):</label>
-  <div class="checkbox-group">
-    <label><input type="checkbox" name="restricciones" value="Ninguna" /> Ninguna</label>
-    <label><input type="checkbox" name="restricciones" value="SIN TACC" /> SIN TACC</label>
-    <label><input type="checkbox" name="restricciones" value="Vegano" /> Vegano</label>
-    <label><input type="checkbox" name="restricciones" value="Hipertensión" /> Hipertensión</label>
-    <label><input type="checkbox" name="restricciones" value="Diabético" /> Diabético</label>
+  <div class="header">
+    Mis 15 Años - Jacqueline
   </div>
 
-  <button type="submit">Enviar confirmación</button>
-</form>
+  <form onsubmit="enviarFormulario(); return false;">
+    <h2>Confirmación de Asistencia</h2>
 
-<div id="mensajeGracias"></div>
+    <label for="nombre">Nombre completo:</label>
+    <input type="text" id="nombre" required>
 
-<script>
-  // Genera un ID único simple basado en nombre + random
-  function generarID(nombre) {
-    const letras = nombre.replace(/\s/g, '').substring(0, 3).toUpperCase();
-    const aleatorio = Math.random().toString(36).substring(2, 7).toUpperCase();
-    return letras + aleatorio;
-  }
+    <label for="asistencia">¿Confirmás tu asistencia?</label>
+    <select id="asistencia" required>
+      <option value="">Seleccionar</option>
+      <option value="Sí">Sí</option>
+      <option value="No">No</option>
+    </select>
 
-  const form = document.getElementById('confirmacionForm');
-  const mensajeGracias = document.getElementById('mensajeGracias');
+    <label>Restricción alimentaria (puede marcar varias):</label>
+    <div class="checkbox-group">
+      <label><input type="checkbox" name="alimentacion" value="Ninguna"> Ninguna</label>
+      <label><input type="checkbox" name="alimentacion" value="SIN TACC"> SIN TACC</label>
+      <label><input type="checkbox" name="alimentacion" value="Vegano"> Vegano</label>
+      <label><input type="checkbox" name="alimentacion" value="Hipertensión"> Hipertensión</label>
+      <label><input type="checkbox" name="alimentacion" value="Diabético"> Diabético</label>
+    </div>
 
-  form.addEventListener('submit', async function(e) {
-    e.preventDefault();
+    <button type="submit">Confirmar por WhatsApp</button>
+    <div id="mensajeGracias">¡Gracias por confirmar! 🎉</div>
+  </form>
 
-    const nombre = document.getElementById('nombre').value.trim();
-    const asistencia = document.getElementById('asistencia').value;
-    const restriccionesChecked = Array.from(document.querySelectorAll('input[name="restricciones"]:checked'));
-    const restricciones = restriccionesChecked.length ? restriccionesChecked.map(c => c.value).join(", ") : "No especifica";
+  <script>
+    function enviarFormulario() {
+      const nombre = document.getElementById("nombre").value.trim();
+      const asistencia = document.getElementById("asistencia").value;
+      const restricciones = Array.from(document.querySelectorAll('input[name="alimentacion"]:checked'))
+                                .map(el => el.value)
+                                .join(", ") || "No especifica";
 
-    const idUnico = generarID(nombre);
-
-    const data = {
-      nombre,
-      asistencia,
-      restricciones,
-      id: idUnico
-    };
-
-    // Cambia aquí por tu URL de Apps Script
-    const urlAppsScript = "https://script.google.com/macros/s/AKfycbw2OxOfAOQAsNaeTOYvRT9PxlHYCXRmNoF2Rk1BTDywDIfGxi5wkFF-aPT-jXGuZMLMDg/exec";
-
-    try {
-      const respuesta = await fetch(urlAppsScript, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data)
-      });
-
-      if (!respuesta.ok) throw new Error(`Error en la respuesta: ${respuesta.status}`);
-
-      const resultado = await respuesta.json();
-
-      if (resultado.status === 'OK') {
-        mensajeGracias.textContent = `¡Gracias por confirmar, ${nombre}! Tu código de invitación es: ${idUnico}`;
-        form.reset();
-      } else {
-        throw new Error(resultado.message || "Error desconocido");
+      if (!nombre || !asistencia) {
+        alert("Por favor completá todos los campos obligatorios.");
+        return;
       }
-    } catch (error) {
-      alert("Hubo un error al enviar los datos. Intentá nuevamente.\n" + error.message);
+
+      // 1. Guardar en Google Sheets
+      const urlGoogle = "https://script.google.com/macros/s/AKfycbw2OxOfAOQAsNaeTOYvRT9PxlHYCXRmNoF2Rk1BTDywDIfGxi5wkFF-aPT-jXGuZMLMDg/exec";
+      const formData = new FormData();
+      formData.append("nombre", nombre);
+      formData.append("asistencia", asistencia);
+      formData.append("restricciones", restricciones);
+
+      fetch(urlGoogle, { method: "POST", body: formData })
+        .then(response => response.text())
+        .then(result => {
+          console.log("Guardado en Sheets:", result);
+          document.getElementById("mensajeGracias").style.display = "block";
+        })
+        .catch(error => {
+          console.error("Error al guardar en Sheets:", error);
+        });
+
+      // 2. Enviar por WhatsApp
+      const mensaje = `Hola, soy ${nombre}. Confirmo asistencia: ${asistencia}. Restricciones alimentarias: ${restricciones}. Evento: Mis 15 Años - Jacqueline`;
+      const telefono = "541124572552";
+      const url = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
+      window.open(url, '_blank');
+
+      // 3. Limpiar formulario después de unos segundos
+      setTimeout(() => {
+        document.querySelector("form").reset();
+        setTimeout(() => {
+          document.getElementById("mensajeGracias").style.display = "none";
+        }, 4000);
+      }, 1000);
     }
-  });
-</script>
+  </script>
 
 </body>
 </html>
