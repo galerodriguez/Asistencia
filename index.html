@@ -128,48 +128,49 @@
   </form>
 
   <script>
-    function enviarFormulario() {
-      const nombre = document.getElementById("nombre").value.trim();
-      const asistencia = document.getElementById("asistencia").value;
-      const restricciones = Array.from(document.querySelectorAll('input[name="alimentacion"]:checked'))
-                                .map(el => el.value)
-                                .join(", ") || "No especifica";
+   function enviarFormulario() {
+  const nombre = document.getElementById("nombre").value.trim();
+  const asistencia = document.getElementById("asistencia").value;
+  const restricciones = Array.from(document.querySelectorAll('input[name="alimentacion"]:checked'))
+                            .map(el => el.value)
+                            .join(", ") || "No especifica";
 
-      if (!nombre || !asistencia) {
-        alert("Por favor completá todos los campos obligatorios.");
-        return;
-      }
+  if (!nombre || !asistencia) {
+    alert("Por favor completá todos los campos obligatorios.");
+    return;
+  }
 
-      const formData = new FormData();
-      formData.append("nombre", nombre);
-      formData.append("asistencia", asistencia);
-      formData.append("restricciones", restricciones);
+  const urlGoogle = "https://script.google.com/macros/s/AKfycbw2OxOfAOQAsNaeTOYvRT9PxlHYCXRmNoF2Rk1BTDywDIfGxi5wkFF-aPT-jXGuZMLMDg/exec";
 
-      const urlGoogle = "https://script.google.com/macros/s/AKfycbw2OxOfAOQAsNaeTOYvRT9PxlHYCXRmNoF2Rk1BTDywDIfGxi5wkFF-aPT-jXGuZMLMDg/exec"; // Reemplazá con tu URL
+  const formData = new FormData();
+  formData.append("nombre", nombre);
+  formData.append("asistencia", asistencia);
+  formData.append("restricciones", restricciones);
 
-      fetch(urlGoogle, {
-        method: "POST",
-        body: formData
-      })
-      .then(res => res.text())
-      .then(res => {
-        console.log("Resultado:", res);
-        document.getElementById("mensajeGracias").style.display = "block";
-      })
-      .catch(err => console.error("Error al guardar en Sheets:", err));
+  fetch(urlGoogle, { method: "POST", body: formData })
+    .then(response => response.text())
+    .then(result => {
+      console.log("Respuesta del servidor:", result);
+      document.getElementById("mensajeGracias").style.display = "block";
+    })
+    .catch(error => {
+      console.error("Error al guardar en Sheets:", error);
+    });
 
-      // Enviar mensaje por WhatsApp
-      const telefono = "541124572552";
-      const mensaje = `Hola, soy ${nombre}. Confirmo asistencia: ${asistencia}. Restricciones alimentarias: ${restricciones}. Evento: Mis 15 Años - Jacqueline`;
-      window.open(`https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`, '_blank');
+  // Envío WhatsApp (lo dejamos igual)
+  const mensaje = `Hola, soy ${nombre}. Confirmo asistencia: ${asistencia}. Restricciones alimentarias: ${restricciones}. Evento: Mis 15 Años - Jacqueline`;
+  const telefono = "541124572552";
+  const url = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
+  window.open(url, '_blank');
 
-      setTimeout(() => {
-        document.querySelector("form").reset();
-        setTimeout(() => {
-          document.getElementById("mensajeGracias").style.display = "none";
-        }, 4000);
-      }, 1000);
-    }
+  setTimeout(() => {
+    document.querySelector("form").reset();
+    setTimeout(() => {
+      document.getElementById("mensajeGracias").style.display = "none";
+    }, 4000);
+  }, 1000);
+}
+
   </script>
 
 </body>
