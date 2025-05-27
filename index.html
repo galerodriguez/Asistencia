@@ -3,76 +3,67 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Confirmación de Asistencia - Jacqueline</title>
+<title>Confirmación de Asistencia - 15 Años</title>
 <style>
   body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #c0c0c0, #d4af37);
-    margin: 0;
+    background: linear-gradient(135deg, #b4b4b4, #f9f9f9, #d4af37);
     padding: 2rem;
-    display: flex;
-    justify-content: center;
+    margin: 0;
   }
   form {
     background: white;
-    border-radius: 15px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.2);
     padding: 2rem;
-    max-width: 480px;
-    width: 100%;
+    max-width: 450px;
+    margin: auto;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.15);
   }
   h2 {
+    color: #a58f47;
     text-align: center;
-    color: #b4975a;
-    margin-bottom: 1.5rem;
   }
   label {
-    font-weight: 700;
-    margin-top: 1rem;
     display: block;
+    margin-top: 1rem;
+    font-weight: bold;
   }
   input[type="text"],
   select {
     width: 100%;
-    padding: 0.6rem;
+    padding: 0.5rem;
     margin-top: 0.3rem;
-    border: 1px solid #999;
-    border-radius: 6px;
-    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
   }
   .checkbox-group label {
-    font-weight: 400;
+    font-weight: normal;
+    margin-top: 0.3rem;
     display: block;
-    margin-top: 0.5rem;
   }
   button {
-    margin-top: 2rem;
-    background-color: #25d366;
+    margin-top: 1.5rem;
+    background-color: #25D366;
+    color: white;
     border: none;
     padding: 0.8rem;
     width: 100%;
-    color: white;
-    font-weight: 700;
-    font-size: 1.1rem;
-    border-radius: 8px;
+    font-size: 1rem;
+    border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
   }
   button:hover {
-    background-color: #128c7e;
+    background-color: #128C7E;
   }
   #mensajeGracias {
     text-align: center;
     margin-top: 1rem;
-    font-weight: 700;
     color: #444;
+    font-weight: bold;
   }
-  @media (max-width: 480px) {
-    body {
-      padding: 1rem;
-    }
+  @media (max-width: 600px) {
     form {
-      padding: 1.2rem;
+      padding: 1rem;
     }
   }
 </style>
@@ -94,34 +85,36 @@
 
   <label>Restricción alimentaria (puede marcar varias):</label>
   <div class="checkbox-group">
-    <label><input type="checkbox" name="alimentacion" value="Ninguna" /> Ninguna</label>
-    <label><input type="checkbox" name="alimentacion" value="SIN TACC" /> SIN TACC</label>
-    <label><input type="checkbox" name="alimentacion" value="Vegano" /> Vegano</label>
-    <label><input type="checkbox" name="alimentacion" value="Hipertensión" /> Hipertensión</label>
-    <label><input type="checkbox" name="alimentacion" value="Diabético" /> Diabético</label>
+    <label><input type="checkbox" name="restricciones" value="Ninguna" /> Ninguna</label>
+    <label><input type="checkbox" name="restricciones" value="SIN TACC" /> SIN TACC</label>
+    <label><input type="checkbox" name="restricciones" value="Vegano" /> Vegano</label>
+    <label><input type="checkbox" name="restricciones" value="Hipertensión" /> Hipertensión</label>
+    <label><input type="checkbox" name="restricciones" value="Diabético" /> Diabético</label>
   </div>
 
   <button type="submit">Enviar confirmación</button>
-
-  <div id="mensajeGracias"></div>
 </form>
 
+<div id="mensajeGracias"></div>
+
 <script>
+  // Genera un ID único simple basado en nombre + random
   function generarID(nombre) {
     const letras = nombre.replace(/\s/g, '').substring(0, 3).toUpperCase();
     const aleatorio = Math.random().toString(36).substring(2, 7).toUpperCase();
     return letras + aleatorio;
   }
 
-  document.getElementById('confirmacionForm').addEventListener('submit', async function (e) {
+  const form = document.getElementById('confirmacionForm');
+  const mensajeGracias = document.getElementById('mensajeGracias');
+
+  form.addEventListener('submit', async function(e) {
     e.preventDefault();
 
     const nombre = document.getElementById('nombre').value.trim();
     const asistencia = document.getElementById('asistencia').value;
-
-    const restricciones = Array.from(document.querySelectorAll('input[name="alimentacion"]:checked'))
-                              .map(el => el.value)
-                              .join(", ") || "No especifica";
+    const restriccionesChecked = Array.from(document.querySelectorAll('input[name="restricciones"]:checked'));
+    const restricciones = restriccionesChecked.length ? restriccionesChecked.map(c => c.value).join(", ") : "No especifica";
 
     const idUnico = generarID(nombre);
 
@@ -132,25 +125,28 @@
       id: idUnico
     };
 
-    const urlScript = "https://script.google.com/macros/s/AKfycbw2OxOfAOQAsNaeTOYvRT9PxlHYCXRmNoF2Rk1BTDywDIfGxi5wkFF-aPT-jXGuZMLMDg/exec";
+    // Cambia aquí por tu URL de Apps Script
+    const urlAppsScript = "https://script.google.com/macros/s/AKfycbzrFpG_TmPnPU9eOlGlYsRrmYamogpbg8opvAJYUCaqHr72Glxe-Wnk5tS7wP-K6nuuQw/exec";
 
     try {
-      const res = await fetch(urlScript, {
-        method: 'POST',
-        body: JSON.stringify(data),
-        headers: {
-          'Content-Type': 'application/json'
-        }
+      const respuesta = await fetch(urlAppsScript, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
       });
-      const json = await res.json();
-      if (json.result === "success") {
-        document.getElementById('mensajeGracias').innerHTML = `¡Gracias por confirmar, <strong>${nombre}</strong>!<br>Tu código de invitación es: <strong>${idUnico}</strong>`;
-        this.reset();
+
+      if (!respuesta.ok) throw new Error(`Error en la respuesta: ${respuesta.status}`);
+
+      const resultado = await respuesta.json();
+
+      if (resultado.status === 'OK') {
+        mensajeGracias.textContent = `¡Gracias por confirmar, ${nombre}! Tu código de invitación es: ${idUnico}`;
+        form.reset();
       } else {
-        document.getElementById('mensajeGracias').innerText = 'Hubo un error, intentá nuevamente.';
+        throw new Error(resultado.message || "Error desconocido");
       }
     } catch (error) {
-      document.getElementById('mensajeGracias').innerText = 'Error de conexión, intentá nuevamente.';
+      alert("Hubo un error al enviar los datos. Intentá nuevamente.\n" + error.message);
     }
   });
 </script>
