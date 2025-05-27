@@ -13,6 +13,38 @@
       box-sizing: border-box;
     }
 
+    <style>
+  .multiple-choice {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .multiple-choice label {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    padding: 6px 12px;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+
+  .multiple-choice input[type="checkbox"] {
+    accent-color: silver;
+    transform: scale(1.1);
+  }
+
+  .multiple-choice label:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+</style>
+
+
     body {
       margin: 0; padding: 20px;
       background: linear-gradient(135deg, #e0e0e0, #b0b0b0);
@@ -193,13 +225,14 @@
 </select>
 
 <label>Restricción alimentaria (marcá todas las que apliquen):</label>
-<div class="multiple-choice" role="group" aria-labelledby="restricciones-label">
-  <label><input type="checkbox" name="restricciones" value="Ninguna" checked /><span>Ninguna</span></label>
-  <label><input type="checkbox" name="restricciones" value="Sin TACC" /><span>Sin TACC</span></label>
-  <label><input type="checkbox" name="restricciones" value="Diabético" /><span>Diabético</span></label>
-  <label><input type="checkbox" name="restricciones" value="Hipertenso" /><span>Hipertenso</span></label>
-  <label><input type="checkbox" name="restricciones" value="Vegano" /><span>Vegano</span></label>
+<div class="multiple-choice">
+  <label><input type="checkbox" name="restricciones" value="Ninguna" checked><span>Ninguna</span></label>
+  <label><input type="checkbox" name="restricciones" value="Sin TACC"><span>Sin TACC</span></label>
+  <label><input type="checkbox" name="restricciones" value="Diabético"><span>Diabético</span></label>
+  <label><input type="checkbox" name="restricciones" value="Hipertenso"><span>Hipertenso</span></label>
+  <label><input type="checkbox" name="restricciones" value="Vegano"><span>Vegano</span></label>
 </div>
+
 
 
       <button type="submit" aria-label="Confirmar asistencia">Confirmar asistencia</button>
