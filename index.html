@@ -81,17 +81,28 @@
       transition: background 0.3s;
     }
 
-    button:hover {
+    button:disabled {
+      background: #999;
+      cursor: not-allowed;
+    }
+
+    button:hover:enabled {
       background: #c4a300;
     }
 
     #mensajeGracias {
       display: none;
       text-align: center;
-      font-size: 1.2rem;
+      font-size: 1.4rem;
       color: green;
       margin-top: 1rem;
       font-weight: bold;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
 
     @media (max-width: 600px) {
@@ -134,8 +145,8 @@
       <label><input type="checkbox" name="alimentacion" value="Diabético"> Diabético</label>
     </div>
 
-    <button type="submit">Confirmar por WhatsApp</button>
-    <div id="mensajeGracias">¡Gracias por confirmar! 🎉</div>
+    <button type="submit" id="botonConfirmar">Confirmar por WhatsApp</button>
+    <div id="mensajeGracias">🎉 ¡Gracias por confirmar! 🎉</div>
   </form>
 
   <script>
@@ -145,18 +156,24 @@
       const restricciones = Array.from(document.querySelectorAll('input[name="alimentacion"]:checked'))
                                 .map(el => el.value)
                                 .join(", ") || "No especifica";
+      const boton = document.getElementById("botonConfirmar");
 
       if (!nombre || !asistencia) {
-        alert("Por favor completá todos los campos obligatorios.");
+        alert("Por favor, completá tu nombre y seleccioná si vas a asistir.");
         return;
       }
 
+      boton.disabled = true;
+
       // 1. Guardar en Google Sheets
       const urlGoogle = "https://script.google.com/macros/s/AKfycbw2OxOfAOQAsNaeTOYvRT9PxlHYCXRmNoF2Rk1BTDywDIfGxi5wkFF-aPT-jXGuZMLMDg/exec";
+      const claveSecreta = "MiClaveSecreta123"; // 🔐 misma clave en el Apps Script
+
       const formData = new FormData();
       formData.append("nombre", nombre);
       formData.append("asistencia", asistencia);
       formData.append("restricciones", restricciones);
+      formData.append("clave", claveSecreta);
 
       fetch(urlGoogle, { method: "POST", body: formData })
         .then(response => response.text())
@@ -166,17 +183,19 @@
         })
         .catch(error => {
           console.error("Error al guardar en Sheets:", error);
+          alert("Hubo un error al guardar los datos.");
         });
 
       // 2. Enviar por WhatsApp
-      const mensaje = `Hola, soy ${nombre}. Confirmo asistencia: ${asistencia}. Restricciones alimentarias: ${restricciones}. Evento: Mis 15 Años - Jacqueline`;
       const telefono = "541124572552";
+      const mensaje = `Hola, soy ${nombre}. Confirmo asistencia: ${asistencia}. Restricciones alimentarias: ${restricciones}. Evento: Mis 15 Años - Jacqueline`;
       const url = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
       window.open(url, '_blank');
 
       // 3. Limpiar formulario después de unos segundos
       setTimeout(() => {
         document.querySelector("form").reset();
+        boton.disabled = false;
         setTimeout(() => {
           document.getElementById("mensajeGracias").style.display = "none";
         }, 4000);
